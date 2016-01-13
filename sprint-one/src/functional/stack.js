@@ -7,10 +7,15 @@ var Stack = function() {
   // Implement the methods below
   someInstance.push = function(value) {
     stackCount++;
+    someInstance[stackCount] = value;
   };
 
-  someInstance.pop = function() {
-    stackCount--;
+  someInstance.pop = function() {   // 3   [1:a, 2:b, 3:c]
+    if (stackCount>0){   
+      var result = someInstance[stackCount]; 
+      stackCount--;
+    }
+    return result; 
   };
 
   someInstance.size = function() {

@@ -4,6 +4,8 @@ var Tree = function(value) {
 
   // your code here
   newTree.children = null;  // fix me
+  newTree.addChild = treeMethods.addChild;
+  newTree.contains = treeMethods.contains;
 
   return newTree;
 };
@@ -11,9 +13,34 @@ var Tree = function(value) {
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
+  this.children = this.children || [];
+  this.children.push(Tree(value));
 };
 
 treeMethods.contains = function(target) {
+  
+  // function helper() {
+  //   if(this.value === target){
+  //     return true;
+  //   } else if(this.children){
+  //     for(var i = 0; i < this.children.length; i++){
+  //       helper(this.children[i]);
+  //     }
+  //   }
+  // }
+  // return helper.call(this) || false;
+
+  if(this.value === target){
+    return true;
+  }  else if (this.children)
+  { 
+    for (var i = 0; i <this.children.length; i++){
+      if (this.children[i].contains(target)){
+        return true;
+      }
+    }
+    return false;
+  }
 };
 
 

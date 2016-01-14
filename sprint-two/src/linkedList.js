@@ -3,13 +3,39 @@ var LinkedList = function() {
   list.head = null;
   list.tail = null;
 
-  list.addToTail = function(value) {
+  list.addToTail = function(val) {
+  var newTail = Node(val);
+  if (list.head === null){
+    list.head = newTail;
+  } else {
+    list.tail.next = newTail;
+  }
+
+  list.tail = newTail;
+
   };
 
   list.removeHead = function() {
+    var oldHead = list.head.value;
+    //var oldHeadref = list.head;
+    list.head = list.head.next;
+    //delete oldHeadref;
+    return oldHead;
+
+    //if list is now empty, set head and tail to null
+
   };
 
   list.contains = function(target) {
+    var nextNode = list.head;
+    var found = false;
+    while(nextNode !== null){
+      if (nextNode.value === target){
+        found = true;
+      } 
+      nextNode = nextNode.next;
+    }
+    return found;
   };
 
   return list;

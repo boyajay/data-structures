@@ -18,18 +18,6 @@ treeMethods.addChild = function(value) {
 };
 
 treeMethods.contains = function(target) {
-  
-  // function helper() {
-  //   if(this.value === target){
-  //     return true;
-  //   } else if(this.children){
-  //     for(var i = 0; i < this.children.length; i++){
-  //       helper(this.children[i]);
-  //     }
-  //   }
-  // }
-  // return helper.call(this) || false;
-
   if(this.value === target){
     return true;
   }  else if (this.children)
@@ -39,9 +27,13 @@ treeMethods.contains = function(target) {
         return true;
       }
     }
-    return false;
   }
+  return false;
 };
+
+
+
+
 
 
 

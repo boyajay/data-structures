@@ -42,7 +42,13 @@ BinarySearchTree.prototype.contains = function(n) {
   // body...
 };
 BinarySearchTree.prototype.depthFirstLog = function(cb) {
-  
+  cb(this.value);
+  if(this.left) {
+    this.depthFirstLog.call(this.left, cb);
+  }
+  if(this.right){
+    this.depthFirstLog.call(this.right, cb);
+  }
 };
 /*
  * Complexity: What is the time complexity of the above functions?

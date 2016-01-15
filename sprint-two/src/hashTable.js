@@ -20,10 +20,13 @@ HashTable.prototype.insert = function(k, v) {
   }
    else {
       var hasFound = false;
-      for(var i = 0; i < this._storage.get(index).length; i++){
+      var bucket = this._storage.get(index);
+        for(var i = 0; i < bucket.length; i++){
         console.log("entered finding loop");
-        if (this._storage.get(index)[i][0] === k){
-          this._storage.get(index)[i][1] = v;
+        if (bucket[i][0] === k){
+          bucket[i][1] = v;
+          this._storage.set(index, bucket);
+          //this._storage.get(index)[i][1] = v;
           hasFound = true;
           break;
         }

@@ -1,5 +1,9 @@
 describe('tree', function() {
   var tree;
+  var testObj = {};
+  var plusOne = function(val){
+    testObj[val] = val+1;
+  };
 
   beforeEach(function() {
     tree = Tree();
@@ -53,6 +57,18 @@ describe('tree', function() {
     expect(tree.contains(7)).to.equal(false);
     expect(tree.contains(8)).to.equal(false);
   });
+
+  it('should correctly accept callback and execute it on every value', function(){
+    tree.addChild(1);
+    tree.addChild(3);
+    tree.children[0].addChild(5);
+    tree.children[1].addChild(7);
+    tree.transverse(plusOne);
+    expect(testObj[1]).to.equal(2);
+    expect(testObj[3]).to.equal(4);
+    expect(testObj[5]).to.equal(6);
+  });
+
 
 
 });

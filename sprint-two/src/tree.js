@@ -8,6 +8,7 @@ var Tree = function(value) {
   newTree.addChild = treeMethods.addChild;
   newTree.contains = treeMethods.contains;
   newTree.removeFromParent =treeMethods.removeFromParent;
+  newTree.transverse = treeMethods.transverse;
   return newTree;
 };
 
@@ -42,7 +43,14 @@ treeMethods.removeFromParent = function() {
   this.parent = null;
 };
 
-
+treeMethods.transverse = function(cb) {
+  cb(this.value);
+  if(this.children !== null) {
+    for(var i = 0; i < this.children.length; i++){
+      this.transverse.call(this.children[i], cb);
+    }
+  }
+};
 
 
 

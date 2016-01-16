@@ -50,6 +50,35 @@ BinarySearchTree.prototype.depthFirstLog = function(cb) {
     this.depthFirstLog.call(this.right, cb);
   }
 };
+BinarySearchTree.prototype.breadthFirstLog = function(cb) {
+  var depthArr = [];
+  var initDepth = 1;
+  function helper(depth) {
+    if(depthArr[depth] === undefined) {
+      depthArr[depth] = [];
+    }  
+    depthArr[depth].push(this.value);
+    var runLeft = false;
+    if(this.left) {
+      runLeft= true;
+      depth++;
+      helper.call(this.left, depth);
+    }
+    if (runLeft){
+      depth--;
+    }
+    if(this.right){
+      depth++;
+      helper.call(this.right, depth);
+    }
+  }
+  helper.call(this, initDepth);
+  for (var i = 1; i < depthArr.length; i++){
+    for (var j = 0; j <depthArr[i].length; j++) {
+      cb(depthArr[i][j]);
+    }
+  }
+};
 /*
  * Complexity: What is the time complexity of the above functions?
  */

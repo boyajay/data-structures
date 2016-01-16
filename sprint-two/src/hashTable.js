@@ -31,7 +31,7 @@ HashTable.prototype.changeSize = function(which){
   else {
     this._limit /= 2;
     this._storage = LimitedArray(this._limit);
-    this._size;
+    this._size = 0;
     for (var j = 0; j < listOfTuples.length; j++){
       this.insert(listOfTuples[j][0], listOfTuples[j][1]);
     }  

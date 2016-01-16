@@ -87,12 +87,8 @@ HashTable.prototype.remove = function(k) {
       this.changeSize('half');
   }
   var index = getIndexBelowMaxForKey(k, this._limit);
-console.log("index is " + index);
-  console.log(this._storage.get(index));
   if (this._storage.get(index) !== null && this._storage.get(index).length > 1){
-    console.log("enter if loop");
     for(var i = 0; i < this._storage.get(index).length; i++){
-      console.log("entering for loop");
       if (this._storage.get(index)[i][0] === k){
         var bucket = this._storage.get(index)[i];
         bucket = null;

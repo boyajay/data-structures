@@ -3,20 +3,33 @@ var BinarySearchTree = function(value) {
   newTree.value = value || null;
   newTree.left = null;
   newTree.right = null;
+  newTree.totalNodes = 0;
+  newTree.valueArr =[];
+  newTree.maxDepth = 0;
+  //counter =0
+  //newTree.leftDepth = 0;
+  //newTree.rightDepth = 0;
+  //newTree.currentDepth = Math.max(newTree.leftDepth, newTree.rightDepth);
   return newTree;
 };
 
 BinarySearchTree.prototype.insert= function(n) {
+  this.totalNodes++;
+  var counter = 0;
   if (this && this.value){
     if (n> this.value){
       if (!this.right){
+        counter++
         this.right = BinarySearchTree(n);
+        //this.rightDepth++;
       } else {
         this.insert.call(this.right, n);
       }
     } else if (n < this.value) {
         if (!this.left){
         this.left = BinarySearchTree(n);
+        counter ++
+        //this.leftDepth++;
       } else {
         this.insert.call(this.left, n);
       }
@@ -26,6 +39,12 @@ BinarySearchTree.prototype.insert= function(n) {
       this.value = n;
     }
   }
+  this.valueArr.push(n);
+  console.log(this.valueArr);
+  if(counter > this.maxDepth) {
+    this.maxDepth = counter;
+  }
+  this.rebalance;
 };
 
 BinarySearchTree.prototype.contains = function(n) {
@@ -79,6 +98,47 @@ BinarySearchTree.prototype.breadthFirstLog = function(cb) {
     }
   }
 };
+
+BinarySearchTree.prototype.rebalance = function (){
+  //var currentDepth = ??;
+  var minDepth = 0;
+  var passedNodes = 0;
+  while(passedNodes < this.totalNodes){
+    passedNodes += 2^(minDepth);
+    minDepth++;
+  }
+  if(this.maxDepth > 2 * minDepth){
+    rebalanceHelper();
+  }
+  var balancedValArr = [];
+  var rebalanceHelper = function(array) {
+    array.sort();
+    var midIndexFunc = function(arr){
+      Math.floor((arr.length-1)/2);
+    };
+    var midIndex = midIndexFunc(array);
+    var arrayLeft =[]; //nested array of remaining values to test 
+    var arrayRight =[];
+    //var temp = BinarySearchTree(valueArr[midIndex]);
+    balancedValArr.push(array[midIndex]);
+    arrayLeft = array.slice(0, midIndex);
+    arrayRight = array.slice(midIndex+1);
+    if(arrayLeft.length > 1){
+      rebalanceHelper(arrayLeft);
+    } 
+    if(arrayRight.length > 1){
+      rebalanceHelper(arrayRight);
+    }
+  };
+
+  rebalanceHelper(this.valueArr);
+
+  //create a while loop to determine the minimum depth
+
+
+
+};
+
 /*
  * Complexity: What is the time complexity of the above functions?
  */
